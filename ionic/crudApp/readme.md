@@ -11,3 +11,8 @@ $ cd crud
 
 $ npm install angularfire2 firebase --save
 
+
+
+--------
+AngularFire2 Docs:
+https://github.com/angular/angularfire2/tree/master/docs
