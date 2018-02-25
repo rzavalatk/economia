@@ -16,3 +16,19 @@ $ npm install angularfire2 firebase --save
 --------
 AngularFire2 Docs:
 https://github.com/angular/angularfire2/tree/master/docs
+
+
+--------
+Plataformas
+
+$ ionic cordova platform add android
+$ ionic cordova platform add ios
+
+Emulate
+--------
+$ ionic cordova emulate ios
+$ ionic cordova emulate android
+--------
+Build android
+$ ionic cordova build android
+$ ionic cordova build android
