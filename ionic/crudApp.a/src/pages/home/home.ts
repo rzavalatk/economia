@@ -5,8 +5,10 @@ import { NavController,
  } from 'ionic-angular';
 
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { AngularFireAuth} from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+
 
 @Component({
   selector: 'page-home',
@@ -15,15 +17,17 @@ import * as firebase from 'firebase/app';
 export class HomePage {
 
   songsRef:any;
-  songs: AngularFireList<any>;
-  
+  af: AngularFireDatabase;
+  //songs: AngularFireList<any>;
+  songs: Observable<any[]>;
   constructor(
     public navCtrl: NavController, 
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
-    public afDatabase: AngularFireDatabase,
+    afDatabase: AngularFireDatabase,
     public afAuth: AngularFireAuth
   ) {
+    this.af = afDatabase;
     this.songsRef = afDatabase.list('songs');
     this.songs = this.songsRef.valueChanges();
   }
@@ -123,28 +127,11 @@ export class HomePage {
     });
     prompt.present();
   }
-
-  login() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((xx)=>{
-      console.log('resultado login google:', xx.user.displayName, xx.user.uid);
-      
-      const userRef = this.afDatabase.list('users');
-
-      userRef.update(xx.user.uid, {userId: xx.user.uid, displayName: xx.user.displayName});
-
-      //userRef.push({userId: xx.user.uid, displayName: xx.user.displayName}).then((xx)=>{
-
-      //});
-      
-    });
+  login(){
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
-  loginWithEmail() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.EmailAuthProvider()).then((xx)=>{
-
-    });
-  }
-  logout() {
+  logout(){
     this.afAuth.auth.signOut();
   }
 

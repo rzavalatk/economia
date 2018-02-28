@@ -9,8 +9,10 @@ import { HomePage } from '../pages/home/home';
 
 // Import the AF2 Module
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule} from 'angularfire2/auth';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+//import * as firebase from 'firebase/app';
+
 // AF2 Settings
 export const firebaseConfig = {
   apiKey: "AIzaSyD8mG8BKodc9OFcwa7BjnnGJJ2EQ7jymAM",
@@ -33,7 +35,6 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule
-
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,6 +44,7 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
+    AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
